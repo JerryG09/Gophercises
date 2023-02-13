@@ -4,6 +4,7 @@ import (
 	"encoding/csv"
 	"flag"
 	"fmt"
+	"math/rand"
 	"os"
 	"strings"
 	"time"
@@ -25,6 +26,8 @@ func main() {
 		exit("Failed to parse the provided CSV file.")
 	}
 	problems := parseLines(lines)
+	shuffledArray := shuffleArray(problems)
+	fmt.Println(shuffledArray)
 
 	timer := time.NewTimer(time.Duration(*timeLimit) * time.Second)
 
@@ -71,4 +74,14 @@ type problem struct {
 
 func exit(msg string) {
 	fmt.Println(msg)
+}
+
+func shuffleArray(a []problem) []problem{
+	rand.Seed(time.Now().UnixNano())
+	n := len(a)
+	for i := n - 1; i > 0; i-- {
+		j := rand.Intn(i + 1)
+		a[i], a[j] = a[j], a[i]
+	}
+	return a
 }
