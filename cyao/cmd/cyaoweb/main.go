@@ -24,4 +24,5 @@ func main() {
 	if err := d.Decode(&story); err != nil {
 		panic(err)
 	}
+	fmt.Printf("%+v\n", story)
 }
