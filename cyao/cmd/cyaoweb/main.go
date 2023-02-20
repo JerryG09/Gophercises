@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 
@@ -29,8 +30,8 @@ func main() {
 		panic(err)
 	}
 	
-	
-	h := cyao.NewHandler(story, nil)
+	tpl := template.Must(template.New("").Parse("Hello !"))
+	h := cyao.NewHandler(story, cyao.WithHandler(tpl))
 	fmt.Printf("Starting the server at: %d\n", *port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", *port), h))
 	
