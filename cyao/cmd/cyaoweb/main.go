@@ -30,7 +30,7 @@ func main() {
 	}
 	
 	
-	h := cyao.NewHandler(story)
+	h := cyao.NewHandler(story, nil)
 	fmt.Printf("Starting the server at: %d\n", *port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", *port), h))
 	
